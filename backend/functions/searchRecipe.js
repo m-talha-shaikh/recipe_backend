@@ -1,5 +1,3 @@
-// backend/functions/searchRecipe.js
-
 exports.handler = async (event, context) => {
   try {
     const { query } = JSON.parse(event.body);
@@ -13,6 +11,11 @@ exports.handler = async (event, context) => {
 
     return {
       statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "https://recipe-finder-black.vercel.app",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE"
+      },
       body: JSON.stringify(recipes),
     };
   } catch (error) {
