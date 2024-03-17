@@ -1,4 +1,17 @@
 exports.handler = async (event, context) => {
+  if (event.httpMethod === 'OPTIONS') {
+    // Respond to preflight requests
+    return {
+      statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE"
+      },
+      body: ''
+    };
+  }
+
   try {
     const { query } = JSON.parse(event.body);
     // Perform your recipe search logic here
@@ -12,7 +25,7 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 200,
       headers: {
-        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Origin": "*", // Allow CORS from all origins
         "Access-Control-Allow-Headers": "Content-Type",
         "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE"
       },
