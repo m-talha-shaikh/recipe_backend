@@ -1,12 +1,10 @@
-const axios = require('axios');
-
 exports.handler = async (event, context) => {
   if (event.httpMethod === 'OPTIONS') {
     // Respond to preflight requests
     return {
       statusCode: 200,
       headers: {
-        "Access-Control-Allow-Origin": "https://recipe-finder-black.vercel.app",
+        "Access-Control-Allow-Origin": "https://recipe-finder-black.vercel.app/",
         "Access-Control-Allow-Headers": "Content-Type",
         "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE"
       },
@@ -16,24 +14,18 @@ exports.handler = async (event, context) => {
 
   try {
     const { query } = JSON.parse(event.body);
+    // Perform your recipe search logic here
 
-    // Make a request to the Spoonacular API
-    const apiKey = '408d436b50c74df3bf2c7f01db1f6cd6';
-    const baseUrl = 'https://api.spoonacular.com/recipes/complexSearch';
-    const response = await axios.get(baseUrl, {
-      params: {
-        apiKey: apiKey,
-        query: query,
-      },
-    });
-
-    // Extract recipe data from the response
-    const recipes = response.data.results;
+    const recipes = [
+      { title: "Recipe 1", image: "recipe1.jpg" },
+      { title: "Recipe 2", image: "recipe2.jpg" },
+      // Dummy recipe data, replace with actual logic
+    ];
 
     return {
       statusCode: 200,
       headers: {
-        "Access-Control-Allow-Origin": "https://recipe-finder-black.vercel.app",
+        "Access-Control-Allow-Origin": "https://recipe-finder-black.vercel.app/",
         "Access-Control-Allow-Headers": "Content-Type",
         "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE"
       },
