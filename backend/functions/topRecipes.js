@@ -15,20 +15,18 @@ exports.handler = async (event, context) => {
   }
 
   try {
-    const { query } = JSON.parse(event.body);
-
-    // Make a request to the Spoonacular API
+    // Make a request to the Spoonacular API for random recipes
     const apiKey = '408d436b50c74df3bf2c7f01db1f6cd6';
-    const baseUrl = 'https://api.spoonacular.com/recipes/complexSearch';
+    const baseUrl = 'https://api.spoonacular.com/recipes/random';
     const response = await axios.get(baseUrl, {
       params: {
         apiKey: apiKey,
-        query: query,
+        number: 5,
       },
     });
 
     // Extract recipe data from the response
-    const recipes = response.data.results;
+    const recipes = response.data.recipes;
 
     return {
       statusCode: 200,
