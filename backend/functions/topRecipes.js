@@ -21,7 +21,7 @@ exports.handler = async (event, context) => {
     const response = await axios.get(baseUrl, {
       params: {
         apiKey: apiKey,
-        number: 5,
+        number: 10,
       },
     });
 
